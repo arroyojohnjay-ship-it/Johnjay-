@@ -1,82 +1,273 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Personal Portfolio</title>
-  <body style="background-color: goldenrod; font-family: Arial, 'Times New Roman', serif; color:black; border-width: 30px; border-style: ridge; border-color: black"></body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnjay C. Arroyo | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a2e',
+                        secondary: '#0f3460',
+                        accent: '#e64900',
+                        light: '#f5f5f5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+        }
+    </style>
 </head>
-<center>
-<body>
-  <header><h1>MY PERSONAL PORTFOLIO</h1></header>
+<body class="bg-gradient-to-br from-gray-900 via-primary to-secondary text-light min-h-screen font-sans">
 
-    <p>Hello! Welcome to my portfolio.</p>
-    <img src="Profile.jpg" alt="Me" width="150">
-    <p>I'm <b>Johnjay C. Arroyo</b>, a BSIT student at Central Philippine State University, Moises Padilla Campus.</p>
-    
-  <h2>Photoshop Edits</h2>
-    <div class="center">
-      <img src="Mylayout.jpg" width="200">
-      <img src="chessboard.jpg" width="200">
-      <img src="product.jpg" width="200">
-    </div>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">JCArroyo</h1>
+            <div class="flex gap-6">
+                <a href="#home" class="hover:text-accent transition-colors">Home</a>
+                <a href="#projects" class="hover:text-accent transition-colors">Projects</a>
+                <a href="#education" class="hover:text-accent transition-colors">Education</a>
+                <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-  <h2>ROTC Albums & Videos</h2>
-    <p><b>Albums:</b></p>
-             <img src="rotcbuddies.jpg"
-              width="180" length="180">
-              <img src="3.jpg"
-              width="180" length="180"
-              <img src="8.jpg"
-              width="180" length="180"
-              <img src="7.jpg "
-              width="180" length="180"
-              <br>
-              <h5>The is pictures are during my rotc reporting in a year 2025</h5>
-              <br>
-  <p><b>Videos:</b></p>
-      <video width="300" height="200" controls src="CPSU-MPC ROTCU Jogging.mp4"></video>
-      <video width="300" height="200" controls src="rifle cadets.mp4"></video>
-      <video width="300" height="200" controls src="soloplay.mp4">
-      </video>    
-</center>
-    <h2>Outputs</h2>
-      <ol>
-        <li><a href="https://www.canva.com/design/DAGxH_WFog0/VnItq552-ukXItjuX-fqEQ/edit">Canva Portfolio</a></li>
-        <li><a href="https://www.figma.com/design/mhrkeps52gPnvCd0gBN2CL/Arroyo_Figma_Portfolio?m=auto&t=vTLX3MWzTz6KnFDa-6">Figma Portfolio</a></li>
-        <li><a href="https://www.canva.com/design/DAGx3T3vF0w/69eUztiBK6zYe69glRykkw/edit?utm_content=DAGx3T3vF0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">3AI's Canva Presentation</a></li>
-        <li><a href="https://www.figma.com/design/QA3ZJJy37BVjh8DcQ1xObM/Arroyo_e-commerce?m=auto&t=ArMMSJ6qZf8QOxFD-6">Figma E-commerce Website</a></li>
-      </ol>
-      
-    <h2>Contacts</h2>
-    <p>
-      <a href="https://www.facebook.com/johnjay.c.arroyo">
-        <img src="Fb.png" width="30"> Facebook: Johnjay C. Arroyo
-      </a><br>
-      <a href="mailto:arroyojohnjay@gmail.com">
-        <img src="Gmail.png" width="30">  Email: arroyojohnjay@gmail.com 
-      </a><br>
-      <a href="#">
-        <img src="phone.png" width="30"> Phone: 09939817955
-      </a><br>
-      <a href="#">
-        <img src="tiktok.png" width="30"> TikTok: 20jjay06
-      </a>
-    </p>
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-6 inline-block p-1 rounded-full bg-gradient-to-r from-accent to-orange-500">
+                <img src="Profile.jpg" alt="Profile Picture" class="w-40 h-40 rounded-full object-cover border-4 border-gray-900">
+            </div>
+            <h2 class="text-5xl font-bold mb-4 text-shadow">Hello, I'm <span class="text-accent">Johnjay C. Arroyo</span></h2>
+            <p class="text-xl mb-8 text-gray-300">BSIT Student | Aspiring Developer & Designer</p>
+            <p class="text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                Passionate about technology, design, and innovation. Currently studying at Central Philippine State University, Moises Padilla Campus.
+            </p>
+            <a href="#contact" class="bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg">
+                Get In Touch
+            </a>
+        </div>
+    </section>
 
-    <h2>Personal Information</h2>
-      <pre style="font-size:1.1em; text-align:left;">
-        <b>Name:</b> Johnjay C. Arroyo
-        <b>Age:</b> 19
-        <b>Address:</b> Brgy. Odiong, Moises Padilla,
-        <br> Negros Occidental
-      </pre>
-    <center>
-    <h4>Leave your message here</h4>
-      <form>
-          <textarea placeholder="Write your message here..."
-          width= "100"
-          ></textarea> <br>
-            <button>Submit</button>
-      </form>
-    </center>
-  </body>
+    <!-- Projects & Works -->
+    <section id="projects" class="py-16 px-4 bg-black/20">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16"><i class="fas fa-folder-open text-accent"></i> My Works & Projects</h2>
+
+            <!-- Design Works -->
+            <h3 class="text-2xl font-semibold mb-6 border-l-4 border-accent pl-3">Creative Designs</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
+                    <img src="Mylayout.jpg" alt="Layout Design" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Layout Design</h4>
+                        <p class="text-sm text-gray-400">Photoshop Editing</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
+                    <img src="chessboard.jpg" alt="Chessboard Design" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Chessboard Art</h4>
+                        <p class="text-sm text-gray-400">Graphic Design</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
+                    <img src="product.jpg" alt="Product Design" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Product Mockup</h4>
+                        <p class="text-sm text-gray-400">Visual Design</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities & Media -->
+            <h3 class="text-2xl font-semibold mb-6 border-l-4 border-accent pl-3">ROTC Activities</h3>
+            <p class="text-center text-gray-400 mb-6">Photos and videos captured during training and reporting in 2025.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <img src="rotcbuddies.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="3.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="8.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="7.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <video controls class="w-full rounded-lg shadow-xl">
+                    <source src="CPSU-MPC ROTCU Jogging.mp4" type="video/mp4">
+                </video>
+                <video controls class="w-full rounded-lg shadow-xl">
+                    <source src="rifle cadets.mp4" type="video/mp4">
+                </video>
+                <video controls class="w-full rounded-lg shadow-xl">
+                    <source src="soloplay.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Outputs & Links -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Digital Portfolios & Designs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <a href="https://www.canva.com/design/DAGxH_WFog0/VnItq552-ukXItjuX-fqEQ/edit" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
+                    <i class="fab fa-canva text-4xl text-blue-400"></i>
+                    <div>
+                        <h4 class="text-xl font-bold">Canva Portfolio</h4>
+                        <p class="text-sm text-gray-400">View Design →</p>
+                    </div>
+                </a>
+
+                <a href="https://www.figma.com/design/mhrkeps52gPnvCd0gBN2CL/Arroyo_Figma_Portfolio" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
+                    <i class="fab fa-figma text-4xl text-pink-400"></i>
+                    <div>
+                        <h4 class="text-xl font-bold">Figma Portfolio</h4>
+                        <p class="text-sm text-gray-400">View UI/UX Design →</p>
+                    </div>
+                </a>
+
+                <a href="https://www.canva.com/design/DAGx3T3vF0w/69eUztiBK6zYe69glRykkw/edit" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
+                    <i class="fas fa-brain text-4xl text-purple-400"></i>
+                    <div>
+                        <h4 class="text-xl font-bold">AI Applications Presentation</h4>
+                        <p class="text-sm text-gray-400">View Slides →</p>
+                    </div>
+                </a>
+
+                <a href="https://www.figma.com/design/QA3ZJJy37BVjh8DcQ1xObM/Arroyo_e-commerce" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
+                    <i class="fas fa-shopping-cart text-4xl text-green-400"></i>
+                    <div>
+                        <h4 class="text-xl font-bold">E-Commerce Website Design</h4>
+                        <p class="text-sm text-gray-400">View Project →</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-16 px-4 bg-black/20">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Education</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-accent">
+                    <h3 class="text-xl font-bold">Tertiary Education</h3>
+                    <p class="text-accent font-semibold">Central Philippine State University - Moises Padilla Campus</p>
+                    <p>Bachelor of Science in Information Technology (BSIT) - 2nd Year</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-accent">
+                    <h3 class="text-xl font-bold">Secondary Education</h3>
+                    <p>La Castellana National High School</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-accent">
+                    <h3 class="text-xl font-bold">Primary Education</h3>
+                    <p>Odiong Elementary School (2017-2018)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Info -->
+    <section id="contact" class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Contact & Information</h2>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Personal Info -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4 border-b border-gray-700 pb-2">About Me</h3>
+                    <p class="mb-2"><strong>Age:</strong> 19</p>
+                    <p class="mb-2"><strong>Address:</strong> Brgy. Odiong, Moises Padilla, Negros Occidental</p>
+                    <p class="mb-2"><strong>Citizenship:</strong> Filipino</p>
+                    <p class="mb-2"><strong>Status:</strong> Single</p>
+                    
+                    <h4 class="font-bold mt-6 mb-2">Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-secondary px-3 py-1 rounded-full text-sm">Time Management</span>
+                        <span class="bg-secondary px-3 py-1 rounded-full text-sm">Collaboration</span>
+                        <span class="bg-secondary px-3 py-1 rounded-full text-sm">Graphic Design</span>
+                        <span class="bg-secondary px-3 py-1 rounded-full text-sm">Web Design</span>
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4 border-b border-gray-700 pb-2">Get Connected</h3>
+                    
+                    <a href="https://www.facebook.com/johnjay.c.arroyo" target="_blank" class="flex items-center gap-4 p-3 hover:bg-gray-700 rounded-lg transition-colors mb-2">
+                        <i class="fab fa-facebook text-2xl text-blue-500"></i>
+                        <span>Johnjay C. Arroyo</span>
+                    </a>
+                    
+                    <a href="mailto:arroyojohnjay@gmail.com" class="flex items-center gap-4 p-3 hover:bg-gray-700 rounded-lg transition-colors mb-2">
+                        <i class="fas fa-envelope text-2xl text-red-400"></i>
+                        <span>arroyojohnjay@gmail.com</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-4 p-3 hover:bg-gray-700 rounded-lg transition-colors mb-2">
+                        <i class="fas fa-phone text-2xl text-green-400"></i>
+                        <span>09939817955</span>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-4 p-3 hover:bg-gray-700 rounded-lg transition-colors">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                        <span>@20jjay06</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Message Form -->
+            <div class="mt-10 text-center">
+                <h3 class="text-2xl font-bold mb-4">Send me a message</h3>
+                <form class="max-w-lg mx-auto bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <textarea placeholder="Write your message here..." class="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-accent resize-none mb-4" rows="4"></textarea>
+                    <button type="button" class="bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg transition-all">
+                        Submit Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-6 text-center text-gray-500">
+        <p>&copy; 2025 Johnjay C. Arroyo. All rights reserved.</p>
+        <p class="text-sm">BSIT Student | Portfolio Project</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
 </html>
