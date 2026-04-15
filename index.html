@@ -6,18 +6,18 @@
     <title>Johnjay C. Arroyo | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1a1a2e',
-                        secondary: '#0f3460',
-                        accent: '#e64900',
-                        light: '#f5f5f5',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        primary: '#0a192f',
+                        secondary: '#112240',
+                        accent: '#64ffda',
+                        orange_accent: '#e64900',
                     },
                 }
             }
@@ -25,306 +25,181 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .card-hover {
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            .glass {
+                @apply bg-white/5 backdrop-blur-lg border border-white/10;
             }
             .nav-link {
-                @apply relative px-4 py-2 text-white font-medium hover:text-accent transition-all duration-300;
+                @apply relative px-4 py-2 text-gray-300 font-medium hover:text-orange_accent transition-all duration-300;
             }
             .nav-link::after {
                 content: '';
-                @apply absolute left-0 bottom-0 w-0 h-0.5 bg-accent transition-all duration-300;
+                @apply absolute left-0 bottom-0 w-0 h-0.5 bg-orange_accent transition-all duration-300;
             }
             .nav-link:hover::after {
                 @apply w-full;
             }
             .ai-chat-btn {
-                @apply fixed bottom-6 right-6 bg-accent hover:bg-orange-600 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-2xl transition-all duration-300;
-                z-index: 9999 !important;
+                @apply fixed bottom-6 right-6 bg-orange_accent hover:scale-110 text-white w-14 h-14 rounded-full shadow-[0_0_20px_rgba(230,73,0,0.4)] flex items-center justify-center text-2xl transition-all duration-300 z-[9999];
             }
         }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-primary to-secondary text-light min-h-screen font-sans">
+<body class="bg-primary text-gray-100 font-sans selection:bg-orange_accent selection:text-white">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed w-full bg-black/70 backdrop-blur-md z-50 shadow-lg">
+    <nav class="fixed w-full bg-primary/80 backdrop-blur-xl z-50 border-b border-white/5">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-white">JCArroyo</h1>
-            <div class="flex gap-6">
+            <h1 class="text-2xl font-bold tracking-tighter text-white">JC<span class="text-orange_accent">ARROYO</span></h1>
+            <div class="hidden md:flex gap-4">
                 <a href="#home" class="nav-link">Home</a>
-                <a href="#projects" class="nav-link">Project</a>
-                <a href="#certificates" class="nav-link">Certificates</a>
-                <a href="#contact" class="nav-link">Contacts</a>
                 <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Work</a>
+                <a href="#certificates" class="nav-link">Certificates</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- AI CHAT BUTTON -->
-    <button onclick="openChat()" class="ai-chat-btn" id="chatButton">
-        <i class="fas fa-robot"></i>
+    <button onclick="toggleChat()" class="ai-chat-btn" id="chatButton">
+        <i class="fas fa-comment-dots"></i>
     </button>
 
-    <!-- AI CHAT WINDOW -->
-    <div id="chatWindow" class="fixed bottom-24 right-6 w-80 bg-gray-800 rounded-2xl shadow-2xl z-50 hidden border border-gray-700">
-        <!-- Chat Header -->
-        <div class="bg-accent p-4 rounded-t-2xl flex justify-between items-center">
-            <h3 class="font-bold text-white flex items-center gap-2">
-                <i class="fas fa-robot"></i> AI Assistant
-            </h3>
-            <button onclick="closeChat()" class="text-white hover:text-gray-200">
-                <i class="fas fa-times"></i>
-            </button>
+    <div id="chatWindow" class="fixed bottom-24 right-6 w-80 md:w-96 glass rounded-2xl shadow-2xl z-50 hidden flex flex-col overflow-hidden border border-orange_accent/20">
+        <div class="bg-orange_accent p-4 flex justify-between items-center">
+            <span class="font-bold"><i class="fas fa-robot mr-2"></i> Assistant</span>
+            <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
         </div>
-
-        <!-- Chat Body -->
-        <div id="chatBody" class="h-80 overflow-y-auto p-4 space-y-3">
-            <div class="bg-gray-700 p-3 rounded-lg rounded-tl-none max-w-[80%]">
-                <p class="text-sm">Hello! I am Johnjay's AI Assistant. How can I help you today?</p>
+        <div id="chatBody" class="h-80 overflow-y-auto p-4 space-y-4 text-sm bg-primary/50">
+            <div class="bg-secondary p-3 rounded-lg rounded-tl-none border border-white/5">
+                Hello! I'm Johnjay's virtual assistant. Ask me about his skills or education!
             </div>
         </div>
-
-        <!-- Chat Input -->
-        <div class="p-3 border-t border-gray-700 flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type a message..." 
-                class="flex-1 bg-gray-700 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent">
-            <button onclick="sendMessage()" class="bg-accent hover:bg-orange-600 p-2 rounded-lg text-white">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+        <div class="p-3 bg-secondary/80 flex gap-2">
+            <input type="text" id="chatInput" placeholder="Ask something..." class="flex-1 bg-primary border border-white/10 rounded-lg px-3 py-2 focus:outline-none focus:border-orange_accent">
+            <button onclick="handleChat()" class="bg-orange_accent px-4 py-2 rounded-lg"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="pt-36 pb-20 px-4 text-center">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-6 inline-block p-1 rounded-full bg-gradient-to-r from-accent to-orange-500">
-                <img src="Profile.jpg" alt="Profile Picture" class="w-40 h-40 rounded-full object-cover border-4 border-gray-900">
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="text-center px-4" data-aos="zoom-in">
+            <div class="relative inline-block mb-8">
+                <div class="absolute -inset-1 bg-gradient-to-r from-orange_accent to-yellow-500 rounded-full blur opacity-40"></div>
+                <img src="Profile.jpg" alt="Profile" class="relative w-44 h-44 rounded-full object-cover border-2 border-white/10">
             </div>
-            <h2 class="text-5xl font-bold mb-4 text-shadow">Hello, I'm <span class="text-accent">Johnjay C. Arroyo</span></h2>
-            <p class="text-xl mb-8 text-gray-300">BSIT Student | Aspiring Developer & Designer</p>
-            <p class="text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                Passionate about technology, design, and innovation. Currently studying at Central Philippine State University, Moises Padilla Campus.
+            <p class="text-orange_accent font-mono mb-4 tracking-widest">HI, MY NAME IS</p>
+            <h2 class="text-5xl md:text-7xl font-bold mb-6">Johnjay C. Arroyo</h2>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                I build digital experiences as a <span class="text-white">BSIT Student</span> and aspiring developer at CPSU.
             </p>
-            <a href="#contact" class="bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg">
-                Get In Touch
-            </a>
+            <div class="mt-10 flex gap-4 justify-center">
+                <a href="#projects" class="bg-orange_accent hover:bg-orange-600 px-8 py-3 rounded-lg font-bold transition-all">View My Work</a>
+                <a href="#contact" class="border border-orange_accent text-orange_accent hover:bg-orange_accent/10 px-8 py-3 rounded-lg font-bold transition-all">Get In Touch</a>
+            </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 px-4 bg-black/20">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16"><i class="fas fa-folder-open text-accent"></i> My Works & Projects</h2>
-
-            <h3 class="text-2xl font-semibold mb-6 border-l-4 border-accent pl-3">Creative Designs</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="Mylayout.jpg" alt="Layout Design" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-xl">Layout Design</h4>
-                        <p class="text-sm text-gray-400">Photoshop Editing</p>
-                    </div>
+    <section class="py-20 bg-secondary/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="glass p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fab fa-html5 text-4xl text-orange-500 mb-4"></i>
+                    <h3 class="font-bold">Web Dev</h3>
                 </div>
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="chessboard.jpg" alt="Chessboard Design" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-xl">Chessboard Art</h4>
-                        <p class="text-sm text-gray-400">Graphic Design</p>
-                    </div>
+                <div class="glass p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-figma text-4xl text-pink-500 mb-4"></i>
+                    <h3 class="font-bold">UI/UX Design</h3>
                 </div>
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="product.jpg" alt="Product Design" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-xl">Product Mockup</h4>
-                        <p class="text-sm text-gray-400">Visual Design</p>
-                    </div>
+                <div class="glass p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-palette text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="font-bold">Graphic Design</h3>
+                </div>
+                <div class="glass p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-code text-4xl text-green-400 mb-4"></i>
+                    <h3 class="font-bold">Prototyping</h3>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <h3 class="text-2xl font-semibold mb-6 border-l-4 border-accent pl-3">ROTC Activities</h3>
-            <p class="text-center text-gray-400 mb-6">Photos and videos captured during training and reporting in 2025.</p>
+    <section id="projects" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4" data-aos="fade-right">
+                <span class="text-orange_accent font-mono text-xl">01.</span> Creative Works
+                <div class="h-px bg-white/10 flex-1"></div>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass rounded-xl overflow-hidden hover:-translate-y-2 transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 bg-gray-700 overflow-hidden">
+                        <img src="Mylayout.jpg" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Layout Design</h4>
+                        <p class="text-gray-400 text-sm mb-4">Advanced Photoshop composition and visual storytelling.</p>
+                        <div class="flex gap-3 text-xs font-mono text-orange_accent">
+                            <span>Photoshop</span><span>Branding</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-20 border-t border-white/5 text-center">
+        <h2 class="text-3xl font-bold mb-6">Start a Project</h2>
+        <p class="text-gray-400 mb-8">Currently looking for new opportunities in development.</p>
+        <a href="mailto:your-email@example.com" class="border border-orange_accent text-orange_accent px-10 py-4 rounded-lg hover:bg-orange_accent/10 transition-all inline-block">Say Hello</a>
+        <div class="mt-12 flex justify-center gap-6 text-xl text-gray-500">
+            <a href="#" class="hover:text-white"><i class="fab fa-github"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Animations
+        AOS.init({ duration: 1000, once: true });
+
+        // Chatbot Logic
+        function toggleChat() {
+            const window = document.getElementById('chatWindow');
+            window.classList.toggle('hidden');
+        }
+
+        function handleChat() {
+            const input = document.getElementById('chatInput');
+            const body = document.getElementById('chatBody');
+            const msg = input.value.trim().toLowerCase();
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                <img src="rotcbuddies.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-                <img src="3.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-                <img src="8.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-                <img src="7.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            </div>
+            if(!msg) return;
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <video controls class="w-full rounded-lg shadow-xl">
-                    <source src="CPSU-MPC ROTCU Jogging.mp4" type="video/mp4">
-                </video>
-                <video controls class="w-full rounded-lg shadow-xl">
-                    <source src="rifle cadets.mp4" type="video/mp4">
-                </video>
-                <video controls class="w-full rounded-lg shadow-xl">
-                    <source src="soloplay.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-    </section>
-
-    <!-- Digital Links Section -->
-    <section class="py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">Digital Portfolios & Designs</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <a href="https://www.canva.com/design/DAGxH_WFog0/VnItq552-ukXItjuX-fqEQ/edit" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
-                    <i class="fab fa-canva text-4xl text-blue-400"></i>
-                    <div>
-                        <h4 class="text-xl font-bold">Canva Portfolio</h4>
-                        <p class="text-sm text-gray-400">View Design →</p>
-                    </div>
-                </a>
-
-                <a href="https://www.figma.com/design/mhrkeps52gPnvCd0gBN2CL/Arroyo_Figma_Portfolio" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
-                    <i class="fab fa-figma text-4xl text-pink-400"></i>
-                    <div>
-                        <h4 class="text-xl font-bold">Figma Portfolio</h4>
-                        <p class="text-sm text-gray-400">View UI/UX Design →</p>
-                    </div>
-                </a>
-
-                <a href="https://www.canva.com/design/DAGx3T3vF0w/69eUztiBK6zYe69glRykkw/edit" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
-                    <i class="fas fa-brain text-4xl text-purple-400"></i>
-                    <div>
-                        <h4 class="text-xl font-bold">AI Applications Presentation</h4>
-                        <p class="text-sm text-gray-400">View Slides →</p>
-                    </div>
-                </a>
-
-                <a href="https://www.figma.com/design/QA3ZJJy37BVjh8DcQ1xObM/Arroyo_e-commerce" target="_blank" class="bg-gray-800 p-6 rounded-xl shadow-xl flex items-center gap-4 card-hover border border-gray-700">
-                    <i class="fas fa-shopping-cart text-4xl text-green-400"></i>
-                    <div>
-                        <h4 class="text-xl font-bold">E-Commerce Website Design</h4>
-                        <p class="text-sm text-gray-400">View Project →</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" class="py-16 px-4 bg-black/20">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">Certificates & Resume</h2>
-            <p class="text-center text-gray-400 mb-12">Click to View and Download</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Certificate 1 -->
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">Web Development Training</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a> 
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="IMG_20260413_070724_519.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold"> IT Training/ Seminar</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a>
-
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">IT Training/ Seminar</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a>
-
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">IT Training/ Seminar</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a> 
-
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">Web Development Training</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a> 
-
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">Web Development Training</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a> 
-
-                <a href="ahdhdhd.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="1766129918319.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">Web Development Training</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a>
-
-                <!-- Resume LINK -->
-                <a href="Arroyo_Portfolio_20260408_175730_0000.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <div class="p-8 text-center flex flex-col items-center justify-center h-full">
-                        <i class="fas fa-file-pdf text-6xl text-red-500 mb-4"></i>
-                        <h3 class="font-bold text-xl">Resume</h3>
-                        <p class="text-sm text-green-400 mt-2">Click to Open Link <i class="fas fa-external-link-alt ml-1"></i></p>
-                    </div>
-                </a>
-
-                <!-- Certificate 3 -->
-                <a href="certificate3.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="certificate3.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">ROTC Achievement</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a>
-
-                <!-- Certificate 4 -->
-                <a href="certificate4.pdf" target="_blank" class="bg-gray-800 rounded-xl overflow-hidden shadow-xl card-hover">
-                    <img src="certificate4.jpg" alt="Certificate" class="w-full h-64 object-cover">
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold">Academic Award</h3>
-                        <p class="text-sm text-green-400">View & Download <i class="fas fa-download ml-1"></i></p>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
+            // Add user message
+            body.innerHTML += `<div class="bg-orange_accent/20 p-3 rounded-lg rounded-tr-none text-right border border-orange_accent/20">${input.value}</div>`;
             
-            <div class="bg-gray-800 p-8 rounded-xl shadow-xl max-w-2xl mx-auto">
-                <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Personal Information</h3>
-                <p class="mb-3"><strong>Age:</strong> 19</p>
-                <p class="mb-3"><strong>Address:</strong> Brgy. Odiong, Moises Padilla, Negros Occidental</p>
-    <p class="text-xl mb-8 text-gray-300">BSIT Student | Aspiring Developer & Designer</p>
-            <p class="text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                Passionate about technology, design, and innovation. Currently studying at Central Philippine State University, Moises Padilla Campus.
-            </p>
-            <a href="#contact" class="bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg">
-                Get In Touch
-            </a>
-        </div>
-    </section>
+            // Logic for "Bot" response
+            let response = "I'm not sure about that. Try asking about Johnjay's 'skills', 'school', or 'age'.";
+            
+            if(msg.includes('skill') || msg.includes('do')) {
+                response = "Johnjay specializes in Web Development (HTML/Tailwind), UI Design (Figma), and Graphic Design (Photoshop).";
+            } else if(msg.includes('school') || msg.includes('study')) {
+                response = "He is currently a BSIT student at Central Philippine State University (CPSU), Moises Padilla Campus.";
+            } else if(msg.includes('age')) {
+                response = "Johnjay is 19 years old.";
+            } else if(msg.includes('contact')) {
+                response = "You can reach him via the 'Get In Touch' button or his social media links at the bottom!";
+            }
 
+            setTimeout(() => {
+                body.innerHTML += `<div class="bg-secondary p-3 rounded-lg rounded-tl-none border border-white/5">${response}</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 600);
+
+            input.value = '';
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') handleChat();
+        });
+    </script>
+</body>
+        </html>
