@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,15 +25,25 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .glass { @apply bg-white/5 backdrop-blur-lg border border-white/10; }
-            .card-hover { @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(230,73,0,0.3)]; }
+            .card-hover { @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(230,73,0,0.3)] hover:border-orange_accent/30; }
             .nav-link { @apply relative px-4 py-2 text-gray-300 font-medium hover:text-orange_accent transition-all duration-300; }
             .nav-link::after { content: ''; @apply absolute left-0 bottom-0 w-0 h-0.5 bg-orange_accent transition-all duration-300; }
             .nav-link:hover::after { @apply w-full; }
-            .chat-window { @apply fixed bottom-20 right-6 w-80 h-96 glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border-orange_accent/20; }
+            .chat-window { @apply fixed bottom-24 right-6 w-80 h-96 glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border-orange_accent/20; }
         }
         html { scroll-behavior: smooth; }
         .typing-text::after { content: '|'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
+        
+        /* Interactive Background Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(230, 73, 0, 0.05) 0%, transparent 80%);
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-100 font-sans">
@@ -43,8 +53,8 @@
             <h1 class="text-2xl font-bold tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">JC<span class="text-orange_accent">ARROYO</span></h1>
             <div class="hidden md:flex gap-4">
                 <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
                 <a href="#certificates" class="nav-link">Certificates</a>
+                <a href="mailto:contact@example.com" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
@@ -53,25 +63,25 @@
         <div class="text-center px-4 relative z-10" data-aos="zoom-in">
             <div class="relative inline-block mb-8 group">
                 <div class="absolute -inset-1 bg-orange_accent rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
-                <img src="Profile.jpg" alt="Profile" class="relative w-40 h-40 rounded-full object-cover border-2 border-white/10 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="Profile.jpg" alt="Profile" class="relative w-40 h-40 rounded-full object-cover border-2 border-white/10 grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl">
             </div>
-            <h2 class="text-5xl md:text-7xl font-bold mb-4">Johnjay C. Arroyo</h2>
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">Johnjay C. Arroyo</h2>
             <p class="text-xl text-gray-400 mb-10 h-8">
                 <span id="typewriter" class="typing-text"></span>
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#certificates" class="bg-orange_accent hover:bg-orange-600 px-8 py-3 rounded-lg font-bold transition-all inline-block">View My Credentials</a>
-                <a href="mailto:contact@example.com" class="border border-white/20 hover:border-orange_accent px-8 py-3 rounded-lg font-bold transition-all inline-block">Get In Touch</a>
+                <a href="#certificates" class="bg-orange_accent hover:bg-orange-600 px-8 py-3 rounded-lg font-bold transition-all transform hover:scale-105 inline-block">View My Credentials</a>
+                <a href="mailto:contact@example.com" class="glass border border-white/20 hover:border-orange_accent px-8 py-3 rounded-lg font-bold transition-all inline-block">Get In Touch</a>
             </div>
         </div>
     </section>
 
     <section id="certificates" class="py-24 bg-secondary/20">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4" data-aos="fade-right">
-                <span class="text-orange_accent font-mono text-xl">01.</span> Certificates & Resume
-                <div class="h-px bg-white/10 flex-1"></div>
-            </h2>
+            <div class="flex items-center gap-4 mb-12" data-aos="fade-right">
+                <h2 class="text-3xl font-bold whitespace-nowrap"><span class="text-orange_accent font-mono text-xl">01.</span> Certificates & Resume</h2>
+                <div class="h-px bg-white/10 w-full"></div>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
@@ -80,10 +90,10 @@
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">ROTC Training Certificate</h3>
                         <div class="flex justify-center gap-4">
-                            <a href="Web_Dev_Cert.pdf" target="_blank" class="text-orange_accent text-sm font-bold border border-orange_accent/30 px-3 py-1 rounded hover:bg-orange_accent/10">
+                            <a href="IMG_20260413_070306_131.jpg" target="_blank" class="text-orange_accent text-sm font-bold border border-orange_accent/30 px-3 py-1 rounded hover:bg-orange_accent/10 transition-colors">
                                 <i class="fas fa-eye mr-1"></i> View
                             </a>
-                            <a href="Web_Dev_Cert.pdf" download class="text-green-400 text-sm font-bold border border-green-400/30 px-3 py-1 rounded hover:bg-green-400/10">
+                            <a href="IMG_20260413_070306_131.jpg" download class="text-green-400 text-sm font-bold border border-green-400/30 px-3 py-1 rounded hover:bg-green-400/10 transition-colors">
                                 <i class="fas fa-download mr-1"></i> Download
                             </a>
                         </div>
@@ -92,19 +102,13 @@
 
                 <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
                     <img src="Screenshot_20260219-082926_1.png" class="w-full h-48 object-cover opacity-80" alt="IT Seminar">
-                    <img src="IMG_20260413_070428_229.jpg" class="w-full h-48 object-cover opacity-80" alt="IT Seminar">
-                    <img src="IMG_20260413_070554_670.jpg" class="w-full h-48 object-cover opacity-80" alt="IT Seminar">
-                    <img src="IMG_20260413_070724_519.jpg" class="w-full h-48 object-cover opacity-80" alt="IT Seminar">
-                    <img src="Screenshot_20260219-082926_1.png" class="w-full h-48 object-cover opacity-80" alt="IT Seminar">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">IT Training/Seminar</h3>
                         <div class="flex justify-center gap-4">
-  <
-                            </div>
-                            <a href="IT_Seminar.pdf" target="_blank" class="text-orange_accent text-sm font-bold border border-orange_accent/30 px-3 py-1 rounded hover:bg-orange_accent/10">
+                            <a href="Screenshot_20260219-082926_1.png" target="_blank" class="text-orange_accent text-sm font-bold border border-orange_accent/30 px-3 py-1 rounded hover:bg-orange_accent/10 transition-colors">
                                 <i class="fas fa-eye mr-1"></i> View
                             </a>
-                            <a href="IT_Seminar.pdf" download class="text-green-400 text-sm font-bold border border-green-400/30 px-3 py-1 rounded hover:bg-green-400/10">
+                            <a href="Screenshot_20260219-082926_1.png" download class="text-green-400 text-sm font-bold border border-green-400/30 px-3 py-1 rounded hover:bg-green-400/10 transition-colors">
                                 <i class="fas fa-download mr-1"></i> Download
                             </a>
                         </div>
@@ -117,10 +121,10 @@
                         <div class="absolute -top-2 -right-2 bg-orange_accent text-[10px] px-2 py-1 rounded-full animate-bounce">2026</div>
                     </div>
                     <h3 class="font-bold text-xl mb-4">Professional Resume</h3>
-                    <a href="Arroyo_Portfolio_20260408_175730_0000.pdf" target="_blank" class="w-full bg-orange_accent text-white py-2 rounded font-bold hover:bg-orange-600 transition-all mb-2 text-center">
-                        Open File
+                    <a href="Arroyo_Portfolio_20260408_175730_0000.pdf" target="_blank" class="w-full bg-orange_accent text-white py-2 rounded font-bold hover:bg-orange-600 transition-all mb-2 text-center shadow-lg">
+                        View Resume
                     </a>
-                    <a href="Arroyo_Portfolio_20260408_175730_0000.pdf" download class="text-gray-400 text-xs hover:text-white">
+                    <a href="Arroyo_Portfolio_20260408_175730_0000.pdf" download class="text-gray-400 text-xs hover:text-white transition-colors">
                         <i class="fas fa-download mr-1"></i> Download PDF
                     </a>
                 </div>
@@ -131,16 +135,19 @@
 
     <footer class="py-10 text-center border-t border-white/5 text-gray-500 text-sm">
         <div class="flex justify-center gap-6 mb-4 text-lg">
-            <a href="#" class="hover:text-orange_accent transition-colors"><i class="fab fa-github"></i></a>
-            <a href="#" class="hover:text-orange_accent transition-colors"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="hover:text-orange_accent transition-colors"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-orange_accent transition-transform hover:-translate-y-1"><i class="fab fa-github"></i></a>
+            <a href="#" class="hover:text-orange_accent transition-transform hover:-translate-y-1"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="hover:text-orange_accent transition-transform hover:-translate-y-1"><i class="fab fa-facebook"></i></a>
         </div>
-        <p>&copy; 2026 Johnjay C. Arroyo. Built with Tailwind CSS.</p>
+        <p>&copy; 2026 Johnjay C. Arroyo. Built with Passion.</p>
     </footer>
 
     <div id="chatWindow" class="chat-window">
         <div class="bg-orange_accent/20 p-4 border-b border-white/10 flex justify-between items-center">
-            <span class="font-bold text-sm">JC Assistant</span>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="font-bold text-sm tracking-tight">JC Assistant</span>
+            </div>
             <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
         </div>
         <div id="chatBox" class="flex-1 p-4 overflow-y-auto text-xs space-y-3">
@@ -149,13 +156,16 @@
             </div>
         </div>
         <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="chatInput" type="text" placeholder="Ask a question..." class="flex-1 bg-primary/50 border border-white/10 rounded-md px-3 py-1 text-xs focus:outline-none focus:border-orange_accent">
-            <button onclick="sendMessage()" class="bg-orange_accent text-white px-3 py-1 rounded-md text-xs"><i class="fas fa-paper-plane"></i></button>
+            <input id="chatInput" type="text" placeholder="Ask about certificates..." class="flex-1 bg-primary/50 border border-white/10 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-orange_accent transition-colors">
+            <button onclick="sendMessage()" class="bg-orange_accent text-white w-10 h-10 rounded-md flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
-    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-lg flex items-center justify-center z-[70] hover:scale-110 transition-transform">
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-2xl flex items-center justify-center z-[70] hover:scale-110 active:scale-95 transition-all group">
         <i class="fas fa-comment-dots text-white text-2xl"></i>
+        <span class="absolute right-16 bg-orange_accent text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Chat with me!</span>
     </button>
 
     <script>
@@ -163,12 +173,12 @@
         AOS.init({ duration: 1000, once: true });
 
         // Typewriter Effect
-        const text = "BSIT Student | Aspiring Developer & Designer";
-        let i = 0;
+        const typeText = "BSIT Student | Aspiring Developer & Designer";
+        let charIndex = 0;
         function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
+            if (charIndex < typeText.length) {
+                document.getElementById("typewriter").innerHTML += typeText.charAt(charIndex);
+                charIndex++;
                 setTimeout(typeWriter, 100);
             }
         }
@@ -178,6 +188,9 @@
         function toggleChat() {
             const win = document.getElementById('chatWindow');
             win.classList.toggle('hidden');
+            if(!win.classList.contains('hidden')) {
+                document.getElementById('chatInput').focus();
+            }
         }
 
         function sendMessage() {
@@ -186,30 +199,28 @@
             if(!input.value.trim()) return;
 
             // User Message
-            box.innerHTML += `<div class="bg-orange_accent/20 p-2 rounded-lg rounded-tr-none ml-8 text-right text-gray-100">${input.value}</div>`;
+            box.innerHTML += `<div class="bg-orange_accent/20 p-2 rounded-lg rounded-tr-none ml-8 text-right text-gray-100 animate-fade-in">${input.value}</div>`;
             
             const userText = input.value.toLowerCase();
             input.value = '';
+            box.scrollTop = box.scrollHeight;
 
             // Simple Auto-reply
             setTimeout(() => {
-                let reply = "That's interesting! Feel free to check out my certificates or email me directly.";
-                if(userText.includes('hello') || userText.includes('hi')) reply = "Hello! Nice to meet you.";
-                if(userText.includes('resume')) reply = "You can download my resume using the orange button in the Credentials section!";
-                if(userText.includes('contact')) reply = "You can email Johnjay at arroyo@example.com";
+                let reply = "I've noted that! You can see Johnjay's full skill set in the Resume section above.";
+                if(userText.includes('hello') || userText.includes('hi')) reply = "Hello! Hope you're having a great day exploring the portfolio.";
+                if(userText.includes('certificate') || userText.includes('credentials')) reply = "All certificates are listed below the home section. You can view or download them directly!";
+                if(userText.includes('contact')) reply = "Best way to reach Johnjay is via the 'Get In Touch' button or email: arroyo@example.com";
                 
-                box.innerHTML += `<div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 text-gray-200">${reply}</div>`;
+                box.innerHTML += `<div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 text-gray-200 animate-fade-in">${reply}</div>`;
                 box.scrollTop = box.scrollHeight;
-            }, 1000);
+            }, 800);
         }
 
-        // Send message on Enter
+        // Send message on Enter key
         document.getElementById('chatInput').addEventListener('keypress', (e) => {
             if(e.key === 'Enter') sendMessage();
         });
     </script>
 </body>
-    </html>
-
-                
-                
+</html>
