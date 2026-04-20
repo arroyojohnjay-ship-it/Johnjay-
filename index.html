@@ -38,6 +38,9 @@
             .chat-window { @apply fixed bottom-24 right-6 w-80 h-96 glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border-orange_accent/20; }
         }
         html { scroll-behavior: smooth; }
+        /* Fix for navbar overlapping content when jumping to IDs */
+        section { scroll-margin-top: 80px; } 
+        
         .typing-text::after { content: '|'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
         #chatBox::-webkit-scrollbar { width: 4px; }
@@ -46,9 +49,11 @@
 </head>
 <body class="bg-primary text-gray-100 font-sans">
 
-    <nav class="fixed w-full bg-primary/80 backdrop-blur-xl z-50 border-b border-white/5">
+    <nav class="fixed w-full bg-primary/90 backdrop-blur-xl z-[100] border-b border-white/5">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">JC<span class="text-orange_accent">ARROYO</span></h1>
+            <h1 class="text-2xl font-bold tracking-tighter cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                JC<span class="text-orange_accent">ARROYO</span>
+            </h1>
             <div class="hidden md:flex gap-4">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#projects" class="nav-link">Projects</a>
@@ -102,49 +107,47 @@
                     </div>
                 </div>
             </div>
-        </div> 
-    </section>
 
-    <section class="py-24 bg-secondary/20">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 orange-header" data-aos="fade-right">
-                Graphic Design 
-                <div class="h-px bg-white/10 flex-1"></div>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up">
-                    <img src="received_1230263685522051.jpeg" class="w-full h-48 object-cover opacity-80" alt="Layout 1">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">Project 01</h3>
-                        <button onclick="viewImage('received_1230263685522051.jpeg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+            <div class="mt-20">
+                <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 orange-header" data-aos="fade-right">
+                    Graphic Design 
+                    <div class="h-px bg-white/10 flex-1"></div>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up">
+                        <img src="received_1230263685522051.jpeg" class="w-full h-48 object-cover opacity-80" alt="Layout 1">
+                        <div class="p-6 text-center">
+                            <h3 class="font-bold mb-4">Project 01</h3>
+                            <button onclick="viewImage('received_1230263685522051.jpeg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                        </div>
                     </div>
-                </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
-                    <img src="Mylayout.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 2">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">Project 02</h3>
-                        <button onclick="viewImage('Mylayout.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                    <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+                        <img src="Mylayout.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 2">
+                        <div class="p-6 text-center">
+                            <h3 class="font-bold mb-4">Project 02</h3>
+                            <button onclick="viewImage('Mylayout.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                        </div>
                     </div>
-                </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
-                    <img src="chessboard.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 3">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">Project 03</h3>
-                        <button onclick="viewImage('chessboard.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                    <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+                        <img src="chessboard.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 3">
+                        <div class="p-6 text-center">
+                            <h3 class="font-bold mb-4">Project 03</h3>
+                            <button onclick="viewImage('chessboard.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                        </div>
                     </div>
-                </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
-                    <img src="Screenshot_20250828-100945.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 4">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">Project 04</h3>
-                        <button onclick="viewImage('Screenshot_20250828-100945.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                    <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+                        <img src="Screenshot_20250828-100945.jpg" class="w-full h-48 object-cover opacity-80" alt="Layout 4">
+                        <div class="p-6 text-center">
+                            <h3 class="font-bold mb-4">Project 04</h3>
+                            <button onclick="viewImage('Screenshot_20250828-100945.jpg')" class="text-orange_accent border border-orange_accent/30 px-3 py-1 rounded text-xs hover:bg-orange_accent hover:text-white">View</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
     </section>
 
-    <section id="certificates" class="py-24 bg-primary">
+    <section id="certificates" class="py-24 bg-secondary/20">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 orange-header" data-aos="fade-right">
                 Certificates & Seminars
@@ -172,20 +175,7 @@
                         <button onclick="viewImage('Screenshot_20260219-082926_1.png')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
-                    <img src="Screenshot_20260217-143606.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 4">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">IT Seminar 04</h3>
-                        <button onclick="viewImage('Screenshot_20260217-143606.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
-                    </div>
-                </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="400">
-                    <img src="IMG_20260413_070724_519.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 5">
-                    <div class="p-6 text-center">
-                        <h3 class="font-bold mb-4">IT Seminar 05</h3>
-                        <button onclick="viewImage('IMG_20260413_070724_519.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -197,17 +187,17 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="mailto:arroyo.johnjay@gmail.com" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fas fa-envelope text-3xl text-orange_accent mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1">Email</h3>
+                    <h3 class="font-bold text-lg mb-1 text-white">Email</h3>
                     <p class="text-sm text-gray-400">arroyo.johnjay@gmail.com</p>
                 </a>
                 <a href="https://www.facebook.com/arroyojohnjay" target="_blank" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fab fa-facebook text-3xl text-blue-500 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1">Facebook</h3>
+                    <h3 class="font-bold text-lg mb-1 text-white">Facebook</h3>
                     <p class="text-sm text-gray-400">Johnjay Arroyo</p>
                 </a>
                 <a href="https://www.instagram.com/itx_johnjay" target="_blank" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fab fa-instagram text-3xl text-pink-500 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1">Instagram</h3>
+                    <h3 class="font-bold text-lg mb-1 text-white">Instagram</h3>
                     <p class="text-sm text-gray-400">@itx_johnjay</p>
                 </a>
             </div>
@@ -222,12 +212,12 @@
         <div class="bg-orange_accent/20 p-4 border-b border-white/10 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span class="font-bold text-sm text-white">JC Portfolio Assistant</span>
+                <span class="font-bold text-sm text-white">JC Assistant</span>
             </div>
             <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
         </div>
         <div id="chatBox" class="flex-1 p-4 overflow-y-auto text-[11px] space-y-3 bg-primary/40 text-white flex flex-col">
-            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start">👋 Hello! I'm JC's virtual assistant. Ask me about his <b>skills</b>, <b>projects</b>, or <b>contact</b> info!</div>
+            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start">👋 Hello! I'm JC's virtual assistant. Ask about <b>skills</b> or <b>projects</b>!</div>
         </div>
         <div id="typingIndicator" class="hidden px-4 py-1 text-[10px] text-gray-400 italic">Assistant is typing...</div>
         <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
@@ -251,7 +241,7 @@
         let charIndex = 0;
         function typeWriter() {
             const el = document.getElementById("typewriter");
-            if (charIndex < typeText.length) {
+            if (el && charIndex < typeText.length) {
                 el.innerHTML += typeText.charAt(charIndex++);
                 setTimeout(typeWriter, 100);
             }
@@ -263,22 +253,19 @@
             window.open(url, '_blank');
         }
 
-        // Chatbot Elements
+        // Chatbot Functionality
         const chatWindow = document.getElementById('chatWindow');
         const chatInput = document.getElementById('chatInput');
         const chatBox = document.getElementById('chatBox');
         const typingIndicator = document.getElementById('typingIndicator');
 
-        // Toggle Chat Window
         function toggleChat() {
             chatWindow.classList.toggle('hidden');
             if(!chatWindow.classList.contains('hidden')) chatInput.focus();
         }
 
-        // Add Message to Box
         function addMessage(text, isUser = false) {
             const msgDiv = document.createElement('div');
-            // Logic for bubble appearance
             msgDiv.className = isUser 
                 ? "bg-orange_accent/40 p-2 rounded-lg rounded-tr-none ml-8 self-end text-right" 
                 : "bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start";
@@ -287,44 +274,30 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Logic for handling sent messages
         function handleSendMessage() {
             const input = chatInput.value.trim();
             if (!input) return;
 
-            // 1. Add User Message
             addMessage(input, true);
             chatInput.value = "";
-            
-            // 2. Show Typing
             typingIndicator.classList.remove('hidden');
 
-            // 3. Process Response
             setTimeout(() => {
                 typingIndicator.classList.add('hidden');
-                let response = "";
+                let response = "I'm a simple assistant! Feel free to explore the sections to see JC's journey.";
                 const val = input.toLowerCase();
 
-                if (val.includes("skill") || val.includes("do you do")) {
-                    response = "JC specializes in <b>UI/UX Design</b>, <b>Graphic Layouts</b>, and <b>Information Technology</b>.";
-                } else if (val.includes("project") || val.includes("work")) {
-                    response = "You can see his work in the <b>Projects</b> section, including Figma and Canva designs.";
-                } else if (val.includes("contact") || val.includes("email")) {
-                    response = "Email him at <a href='mailto:arroyo.johnjay@gmail.com' class='text-orange_accent'>arroyo.johnjay@gmail.com</a>.";
-                } else if (val.includes("certif")) {
-                    response = "JC has attended multiple IT seminars. Check them out in the <b>Certificates</b> section above.";
-                } else {
-                    response = "I'm a simple assistant! Feel free to explore the sections to see JC's journey.";
-                    addMessage(response);
-            }, 1000); // Wait 1 second before replying
+                if (val.includes("skill")) response = "JC specializes in <b>UI/UX Design</b> and <b>Graphic Layouts</b>.";
+                else if (val.includes("project")) response = "Check out the <b>Projects</b> section for Figma and Canva designs.";
+                else if (val.includes("contact")) response = "Reach him via email at <span class='text-orange_accent'>arroyo.johnjay@gmail.com</span>";
+
+                addMessage(response);
+            }, 1000);
         }
 
-        // Send message on Enter key
         chatInput.onkeypress = (e) => {
             if(e.key === 'Enter') handleSendMessage();
         };
     </script>
 </body>
 </html>
-                
-            
