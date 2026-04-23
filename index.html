@@ -35,7 +35,6 @@
             .nav-link { @apply relative px-4 py-2 text-gray-300 font-medium hover:text-orange_accent transition-all duration-300; }
             .nav-link::after { content: ''; @apply absolute left-0 bottom-0 w-0 h-0.5 bg-orange_accent transition-all duration-300; }
             .nav-link:hover::after { @apply w-full; }
-            .chat-window { @apply fixed bottom-24 right-6 w-80 h-96 glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border-orange_accent/20; }
         }
         html { scroll-behavior: smooth; }
         /* Fix for navbar overlapping content when jumping to IDs */
@@ -43,8 +42,6 @@
         
         .typing-text::after { content: '|'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
-        #chatBox::-webkit-scrollbar { width: 4px; }
-        #chatBox::-webkit-scrollbar-thumb { background: rgba(230, 73, 0, 0.3); border-radius: 10px; }
     </style>
 </head>
 <body class="bg-primary text-gray-100 font-sans">
@@ -158,35 +155,35 @@
                     <img src="IMG_ITseminar1.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 1">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 01</h3>
-                        <button onclick="viewImage('IMG_ITseminar1.jpg" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
+                        <button onclick="viewImage('IMG_ITseminar1.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
                 <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
                     <img src="IMG_seminar2.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 2">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4"> Seminar certificate 02</h3>
-                        <button onclick="viewImage('IMG_seminar2.jpg" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
+                        <button onclick="viewImage('IMG_seminar2.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
                 <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
                     <img src="IMG_itseminar3.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 3">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 03</h3>
-                        <button onclick="viewImage('IMG_itseminar3.jpg" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
+                        <button onclick="viewImage('IMG_itseminar3.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
                 <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
                     <img src="It_seminar4.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 4">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 04</h3>
-                        <button onclick="viewImage('It_seminar4.jpg" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
+                        <button onclick="viewImage('It_seminar4.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
                     <img src="IT_seminar5.png" class="w-full h-48 object-cover opacity-80" alt="Cert 5">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 05</h3>
-                        <button onclick="viewImage('IT_seminar5.png)" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
+                        <button onclick="viewImage('IT_seminar5.png')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
            </div>
@@ -221,30 +218,6 @@
         <p>&copy; 2026 Johnjay C. Arroyo | BSIT Student</p>
     </footer>
 
-    <div id="chatWindow" class="chat-window">
-        <div class="bg-orange_accent/20 p-4 border-b border-white/10 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span class="font-bold text-sm text-white">JC Assistant</span>
-            </div>
-            <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="chatBox" class="flex-1 p-4 overflow-y-auto text-[11px] space-y-3 bg-primary/40 text-white flex flex-col">
-            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start">👋 Hello! I'm JC's virtual assistant. Ask about <b>skills</b> or <b>projects</b>!</div>
-        </div>
-        <div id="typingIndicator" class="hidden px-4 py-1 text-[10px] text-gray-400 italic">Assistant is typing...</div>
-        <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="chatInput" type="text" placeholder="Ask something..." class="flex-1 bg-transparent border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-orange_accent">
-            <button onclick="handleSendMessage()" class="text-orange_accent hover:text-orange-600 px-2">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-2xl flex items-center justify-center z-[70] hover:scale-110 active:scale-95 transition-all">
-        <i class="fas fa-comment-dots text-white text-2xl"></i>
-    </button>
-
     <script>
         // Initialize AOS
         AOS.init({ duration: 1000, once: true });
@@ -265,52 +238,78 @@
         function viewImage(url) {
             window.open(url, '_blank');
         }
+    </script>
+    <div id="jcChatWindow" class="fixed bottom-24 right-6 w-80 h-96 bg-secondary glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border border-white/10">
+        <div class="bg-orange_accent/20 p-4 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="font-bold text-sm text-white">JC Assistant</span>
+            </div>
+            <button onclick="toggleJCChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="jcChatBox" class="flex-1 p-4 overflow-y-auto text-xs space-y-3 bg-primary/40 text-white flex flex-col">
+            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start">👋 Hello! Ask me anything about Johnjay C. Arroyo! (Skills, Projects, etc.)</div>
+        </div>
+        <div id="jcTypingIndicator" class="hidden px-4 py-1 text-[10px] text-gray-400 italic">Assistant is typing...</div>
+        <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
+            <input id="jcChatInput" type="text" placeholder="Type your question..." class="flex-1 bg-transparent border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-orange_accent">
+            <button onclick="handleJCSendMessage()" class="text-orange_accent hover:text-orange-600 px-2">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
 
-        // Chatbot Functionality
-        const chatWindow = document.getElementById('chatWindow');
-        const chatInput = document.getElementById('chatInput');
-        const chatBox = document.getElementById('chatBox');
-        const typingIndicator = document.getElementById('typingIndicator');
+    <button onclick="toggleJCChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-2xl flex items-center justify-center z-[70] hover:scale-110 active:scale-95 transition-all">
+        <i class="fas fa-comment-dots text-white text-2xl"></i>
+    </button>
 
-        function toggleChat() {
-            chatWindow.classList.toggle('hidden');
-            if(!chatWindow.classList.contains('hidden')) chatInput.focus();
+    <script>
+        const jcChatWindow = document.getElementById('jcChatWindow');
+        const jcChatInput = document.getElementById('jcChatInput');
+        const jcChatBox = document.getElementById('jcChatBox');
+        const jcTypingIndicator = document.getElementById('jcTypingIndicator');
+
+        function toggleJCChat() {
+            jcChatWindow.classList.toggle('hidden');
+            if(!jcChatWindow.classList.contains('hidden')) jcChatInput.focus();
         }
 
-        function addMessage(text, isUser = false) {
+        function addJCMessage(text, isUser = false) {
             const msgDiv = document.createElement('div');
             msgDiv.className = isUser 
                 ? "bg-orange_accent/40 p-2 rounded-lg rounded-tr-none ml-8 self-end text-right" 
                 : "bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start";
             msgDiv.innerHTML = text;
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            jcChatBox.appendChild(msgDiv);
+            jcChatBox.scrollTop = jcChatBox.scrollHeight;
         }
 
-        function handleSendMessage() {
-            const input = chatInput.value.trim();
+        function handleJCSendMessage() {
+            const input = jcChatInput.value.trim();
             if (!input) return;
 
-            addMessage(input, true);
-            chatInput.value = "";
-            typingIndicator.classList.remove('hidden');
+            addJCMessage(input, true);
+            jcChatInput.value = "";
+            jcTypingIndicator.classList.remove('hidden');
 
+            // Basic AI simulation (Replace with real AI call)
             setTimeout(() => {
-                typingIndicator.classList.add('hidden');
-                let response = "I'm a simple assistant! Feel free to explore the sections to see JC's journey.";
+                jcTypingIndicator.classList.add('hidden');
+                let response = "That's a great question! Explore the portfolio to find out, or ask something else.";
                 const val = input.toLowerCase();
 
-                if (val.includes("skill")) response = "JC specializes in <b>UI/UX Design</b> and <b>Graphic Layouts</b>.";
-                else if (val.includes("project")) response = "Check out the <b>Projects</b> section for Figma and Canva designs.";
-                else if (val.includes("contact")) response = "Reach him via email at <span class='text-orange_accent'>arroyo.johnjay@gmail.com</span>";
+                if (val.includes("skill")) response = "Johnjay specializes in <b>UI/UX Design</b> and <b>Graphic Layouts</b>. Check the Graphic Design section!";
+                else if (val.includes("project")) response = "You can view Johnjay's digital designs (Canva, Figma, E-commerce) in the <b>Projects</b> section.";
+                else if (val.includes("cert")) response = "Johnjay has attended multiple IT seminars and earned certificates. You can see them in the <b>Certificates & Seminars</b> section.";
+                else if (val.includes("contact") || val.includes("email") || val.includes("reach")) response = "You can contact Johnjay via email at <span class='text-orange_accent'>arroyo.johnjay@gmail.com</span>, or find his social media links in the <b>Get In Touch</b> section.";
 
-                addMessage(response);
+                addJCMessage(response);
             }, 1000);
         }
 
-        chatInput.onkeypress = (e) => {
-            if(e.key === 'Enter') handleSendMessage();
+        jcChatInput.onkeypress = (e) => {
+            if(e.key === 'Enter') handleJCSendMessage();
         };
     </script>
 </body>
-</html>
+                                                                                      </html>
