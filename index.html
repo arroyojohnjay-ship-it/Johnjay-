@@ -37,11 +37,11 @@
             .nav-link:hover::after { @apply w-full; }
         }
         html { scroll-behavior: smooth; }
-        /* Fix for navbar overlapping content when jumping to IDs */
         section { scroll-margin-top: 80px; } 
-        
         .typing-text::after { content: '|'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
+        #jcChatBox::-webkit-scrollbar { width: 4px; }
+        #jcChatBox::-webkit-scrollbar-thumb { background: #e64900; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-primary text-gray-100 font-sans">
@@ -172,14 +172,14 @@
                         <button onclick="viewImage('IMG_itseminar3.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
-                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up">
                     <img src="It_seminar4.jpg" class="w-full h-48 object-cover opacity-80" alt="Cert 4">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 04</h3>
                         <button onclick="viewImage('It_seminar4.jpg')" class="text-orange_accent border border-orange_accent/30 px-4 py-2 rounded text-xs hover:bg-orange_accent hover:text-white">View Certificate</button>
                     </div>
                 </div>
-               <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+               <div class="glass rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
                     <img src="IT_seminar5.png" class="w-full h-48 object-cover opacity-80" alt="Cert 5">
                     <div class="p-6 text-center">
                         <h3 class="font-bold mb-4">Seminar certificate 05</h3>
@@ -193,21 +193,17 @@
     <section id="contact" class="py-24 bg-primary">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-            <p class="text-gray-400 mb-12">I'm always open to discussing new projects or creative opportunities.</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="mailto:arroyo.johnjay@gmail.com" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fas fa-envelope text-3xl text-orange_accent mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1 text-white">Email</h3>
                     <p class="text-sm text-gray-400">arroyo.johnjay@gmail.com</p>
                 </a>
                 <a href="https://www.facebook.com/arroyojohnjay" target="_blank" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fab fa-facebook text-3xl text-blue-500 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1 text-white">Facebook</h3>
                     <p class="text-sm text-gray-400">Johnjay Arroyo</p>
                 </a>
                 <a href="https://www.instagram.com/itx_johnjay" target="_blank" class="glass p-8 rounded-2xl card-hover group">
                     <i class="fab fa-instagram text-3xl text-pink-500 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-1 text-white">Instagram</h3>
                     <p class="text-sm text-gray-400">@itx_johnjay</p>
                 </a>
             </div>
@@ -218,11 +214,28 @@
         <p>&copy; 2026 Johnjay C. Arroyo | BSIT Student</p>
     </footer>
 
+    <div id="jcChatWindow" class="fixed bottom-24 right-6 w-80 h-96 bg-secondary glass rounded-2xl flex flex-col z-[100] hidden overflow-hidden shadow-2xl border border-white/10">
+        <div class="bg-orange_accent/20 p-4 flex justify-between items-center border-b border-white/10">
+            <span class="font-bold text-sm">JC Assistant</span>
+            <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="jcChatBox" class="flex-1 p-4 overflow-y-auto text-xs space-y-3 bg-primary/40">
+            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8">👋 Hello! I'm Johnjay's assistant. Ask me about his projects or skills!</div>
+        </div>
+        <div class="p-3 bg-white/5 flex gap-2">
+            <input id="jcChatInput" type="text" placeholder="Type here..." class="flex-1 bg-transparent border border-white/10 rounded px-3 py-2 text-xs focus:outline-none focus:border-orange_accent text-white">
+            <button onclick="sendMsg()" class="text-orange_accent"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-2xl flex items-center justify-center z-[100] hover:scale-110 transition-transform">
+        <i class="fas fa-comment-dots text-white text-2xl"></i>
+    </button>
+
     <script>
-        // Initialize AOS
+        // Main Scripts
         AOS.init({ duration: 1000, once: true });
 
-        // Typewriter Effect
         const typeText = "BSIT Student | Aspiring UI/UX Designer";
         let charIndex = 0;
         function typeWriter() {
@@ -234,82 +247,42 @@
         }
         window.onload = typeWriter;
 
-        // Image View Function
-        function viewImage(url) {
-            window.open(url, '_blank');
-        }
-    </script>
-    <div id="jcChatWindow" class="fixed bottom-24 right-6 w-80 h-96 bg-secondary glass rounded-2xl flex flex-col z-[60] hidden overflow-hidden shadow-2xl border border-white/10">
-        <div class="bg-orange_accent/20 p-4 border-b border-white/10 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span class="font-bold text-sm text-white">JC Assistant</span>
-            </div>
-            <button onclick="toggleJCChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="jcChatBox" class="flex-1 p-4 overflow-y-auto text-xs space-y-3 bg-primary/40 text-white flex flex-col">
-            <div class="bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start">👋 Hello! Ask me anything about Johnjay C. Arroyo! (Skills, Projects, etc.)</div>
-        </div>
-        <div id="jcTypingIndicator" class="hidden px-4 py-1 text-[10px] text-gray-400 italic">Assistant is typing...</div>
-        <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="jcChatInput" type="text" placeholder="Type your question..." class="flex-1 bg-transparent border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-orange_accent">
-            <button onclick="handleJCSendMessage()" class="text-orange_accent hover:text-orange-600 px-2">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
+        function viewImage(url) { window.open(url, '_blank'); }
 
-    <button onclick="toggleJCChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-orange_accent rounded-full shadow-2xl flex items-center justify-center z-[70] hover:scale-110 active:scale-95 transition-all">
-        <i class="fas fa-comment-dots text-white text-2xl"></i>
-    </button>
+        // Chatbot Logic
+        const chatWin = document.getElementById('jcChatWindow');
+        const chatBox = document.getElementById('jcChatBox');
+        const chatInput = document.getElementById('jcChatInput');
 
-    <script>
-        const jcChatWindow = document.getElementById('jcChatWindow');
-        const jcChatInput = document.getElementById('jcChatInput');
-        const jcChatBox = document.getElementById('jcChatBox');
-        const jcTypingIndicator = document.getElementById('jcTypingIndicator');
-
-        function toggleJCChat() {
-            jcChatWindow.classList.toggle('hidden');
-            if(!jcChatWindow.classList.contains('hidden')) jcChatInput.focus();
+        function toggleChat() { 
+            chatWin.classList.toggle('hidden'); 
         }
 
-        function addJCMessage(text, isUser = false) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = isUser 
-                ? "bg-orange_accent/40 p-2 rounded-lg rounded-tr-none ml-8 self-end text-right" 
-                : "bg-white/10 p-2 rounded-lg rounded-tl-none mr-8 self-start";
-            msgDiv.innerHTML = text;
-            jcChatBox.appendChild(msgDiv);
-            jcChatBox.scrollTop = jcChatBox.scrollHeight;
-        }
+        function sendMsg() {
+            const val = chatInput.value.trim();
+            if(!val) return;
+            
+            // User message
+            const uDiv = document.createElement('div');
+            uDiv.className = "bg-orange_accent/40 p-2 rounded-lg rounded-tr-none ml-8 text-right";
+            uDiv.innerText = val;
+            chatBox.appendChild(uDiv);
+            chatInput.value = "";
 
-        function handleJCSendMessage() {
-            const input = jcChatInput.value.trim();
-            if (!input) return;
-
-            addJCMessage(input, true);
-            jcChatInput.value = "";
-            jcTypingIndicator.classList.remove('hidden');
-
-            // Basic AI simulation (Replace with real AI call)
+            // Auto Response
             setTimeout(() => {
-                jcTypingIndicator.classList.add('hidden');
-                let response = "That's a great question! Explore the portfolio to find out, or ask something else.";
-                const val = input.toLowerCase();
-
-                if (val.includes("skill")) response = "Johnjay specializes in <b>UI/UX Design</b> and <b>Graphic Layouts</b>. Check the Graphic Design section!";
-                else if (val.includes("project")) response = "You can view Johnjay's digital designs (Canva, Figma, E-commerce) in the <b>Projects</b> section.";
-                else if (val.includes("cert")) response = "Johnjay has attended multiple IT seminars and earned certificates. You can see them in the <b>Certificates & Seminars</b> section.";
-                else if (val.includes("contact") || val.includes("email") || val.includes("reach")) response = "You can contact Johnjay via email at <span class='text-orange_accent'>arroyo.johnjay@gmail.com</span>, or find his social media links in the <b>Get In Touch</b> section.";
-
-                addJCMessage(response);
-            }, 1000);
+                const rDiv = document.createElement('div');
+                rDiv.className = "bg-white/10 p-2 rounded-lg rounded-tl-none mr-8";
+                let reply = "I'm still learning! You can see Johnjay's work in the Projects section.";
+                if(val.toLowerCase().includes('skill')) reply = "Johnjay is skilled in UI/UX, Figma, and Graphic Design.";
+                if(val.toLowerCase().includes('contact')) reply = "You can email him at arroyo.johnjay@gmail.com.";
+                rDiv.innerText = reply;
+                chatBox.appendChild(rDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
         }
 
-        jcChatInput.onkeypress = (e) => {
-            if(e.key === 'Enter') handleJCSendMessage();
-        };
+        chatInput.onkeypress = (e) => { if(e.key === 'Enter') sendMsg(); };
     </script>
-</body>
-                                                                                      </html>
+</body> 
+</html>
